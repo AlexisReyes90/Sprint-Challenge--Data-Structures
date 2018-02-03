@@ -36,19 +36,23 @@ class HashTable {
   insert(key, value) {
     if (this.capacityIsFull()) this.resize();
     const index = getIndexBelowMax(key.toString(), this.limit);
-    // what is this doing?
-    // This is calling checkLimit, then assigning that index to the array[index] = value
     if (!this.storage.get(index)) {
       // has head and tail value now
       const bucket = new LinkedList();
       // create new bucket, add key: value pair
       bucket.addToTail([key, value]);
+      this.storage.set(index, bucket);
     }
     if (this.storage.get(index)) {
       const curr = bucket.head;
       if (curr.value[0] === key) {
         curr.value[1] === value;
+        // what if this.storage.get(index) isnt the right key?
       }
+    }
+    // if no key, add the value pair
+    if (!curr.value[0]) {
+      bucket.addToTail([key, value]);
     }
   }
   // Removes the key, value pair from the hash table
@@ -58,10 +62,13 @@ class HashTable {
     const index = getIndexBelowMax(key.toString(), this.limit);
     let bucket = this.storage.get(index);
 
-    if (bucket) {
-      bucket = bucket.filter(item => item[0] !== key);
-      this.storage.set(index, bucket);
+    //check to see if there is a bucket
+    if(bucket) {
+      if (bucket.head[0] === key) {
+        // remove bucket key here
+      }
     }
+    
   }
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
