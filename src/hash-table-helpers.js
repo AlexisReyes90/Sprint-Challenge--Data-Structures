@@ -1,4 +1,25 @@
 // A special array class that can only store the number of items specified by the `limit` argument
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+  }
+
+  addToTail(value) {
+    const tailNode = {
+      value,
+      next: null,
+    };
+    if (this.tail === null) {
+      this.head = value;
+      this.tail = value;
+      return;
+    }
+    const holder = this.tail;
+    holder.next = tailNode;
+    this.tail = tailNode;
+  }
+}
 class LimitedArray {
   constructor(limit) {
     // You should not be directly accessing this array from your hash table methods
@@ -6,7 +27,7 @@ class LimitedArray {
     this.storage = [];
     this.limit = limit;
   }
-
+  // checks to see if the index is withing the array
   checkLimit(index) {
     if (typeof index !== 'number') throw new Error('The supplied index needs to be a number');
     if (this.limit <= index) {
@@ -20,6 +41,8 @@ class LimitedArray {
     }
   }
   // Use this getter function to fetch elements from this class
+  // calls checkLimit
+  // if the index in checkLimit is in the array, assign it to the storage = value
   get(index) {
     this.checkLimit(index);
     return this.storage[index];
@@ -50,6 +73,7 @@ const getIndexBelowMax = (str, max) => {
 };
 
 module.exports = {
+  LinkedList,
   LimitedArray,
   getIndexBelowMax,
 };
