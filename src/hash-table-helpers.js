@@ -4,21 +4,6 @@ class LinkedList {
     this.head = null;
     this.tail = null;
   }
-
-  addToTail(value) {
-    const tailNode = {
-      value,
-      next: null,
-    };
-    if (this.tail === null) {
-      this.head = value;
-      this.tail = value;
-      return;
-    }
-    const holder = this.tail;
-    holder.next = tailNode;
-    this.tail = tailNode;
-  }
 }
 class LimitedArray {
   constructor(limit) {

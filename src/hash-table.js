@@ -38,10 +38,18 @@ class HashTable {
     const index = getIndexBelowMax(key.toString(), this.limit);
     // what is this doing?
     // This is calling checkLimit, then assigning that index to the array[index] = value
-    const bucket = this.storage.get(index) || [];
-    const bucket = new LinkedList
-
-    const newVal = addToTail(bucket);
+    if (!this.storage.get(index)) {
+      // has head and tail value now
+      const bucket = new LinkedList();
+      // create new bucket, add key: value pair
+      bucket.addToTail([key, value]);
+    }
+    if (this.storage.get(index)) {
+      const curr = bucket.head;
+      if (curr.value[0] === key) {
+        curr.value[1] === value;
+      }
+    }
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
