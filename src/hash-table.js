@@ -44,14 +44,18 @@ class HashTable {
       this.storage.set(index, bucket);
     }
     if (this.storage.get(index)) {
+      const bucket = this.storage.get(index);
+      let flag = false;
       const curr = bucket.head;
       if (curr.value[0] === key) {
         curr.value[1] === value;
+        flag = true;
         // what if this.storage.get(index) isnt the right key?
       }
+      curr.next;
     }
     // if no key, add the value pair
-    if (!curr.value[0]) {
+    if (!flag) {
       bucket.addToTail([key, value]);
     }
   }
@@ -76,12 +80,27 @@ class HashTable {
   retrieve(key) {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
-    let retrieved;
+    let flag = false;
+    // if there is a linkedList
     if (bucket) {
-      retrieved = bucket.filter(item => item[0] === key)[0];
+      while (bucket.head.next !== null) {
+        if (bucket.head.value[0] === key) {
+          flag = true;
+          return bucket.head.value[1];
+          
+        }
+        // itterate through to the next
+        bucket.head.bext;
+      }
+      // if not found
+      // I can use a flag here too to help find if it retrieved the key or not
+      if (!flag) {
+        return undefined;
+      }
+      // I dont think I need this
+      // retrieved = bucket.filter(item => item[0] === key)[0];
     }
 
-    return retrieved ? retrieved[1] : undefined;
   }
 }
 
