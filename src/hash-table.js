@@ -68,8 +68,19 @@ class HashTable {
 
     //check to see if there is a bucket
     if(bucket) {
-      if (bucket.head[0] === key) {
+      if (bucket.head.value[0] === key) {
         // remove bucket key here
+      }
+      const holder = bucket.head;
+      // current is the tail value
+      const current = holder.next;
+      if (current.value[0] === key) {
+        holder.next = current.next;
+        current.next = null;
+      }
+      // if head is equal to tail
+      if (bucket.tail === current) {
+        bucket.tail = holder;
       }
     }
     
